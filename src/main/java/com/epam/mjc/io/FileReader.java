@@ -1,10 +1,13 @@
 package com.epam.mjc.io;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 
 public class FileReader {
-    public static Profile getDataFromFile(File file) throws IOException {
+
+    public Profile getDataFromFile(File file) {
         StringBuilder str = new StringBuilder();
         try (FileInputStream fileInputStream = new FileInputStream(file.getAbsoluteFile());) {
             int c;
