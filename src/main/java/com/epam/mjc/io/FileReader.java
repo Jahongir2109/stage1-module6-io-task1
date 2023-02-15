@@ -1,23 +1,28 @@
 package com.epam.mjc.io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 
 public class FileReader {
-
     public Profile getDataFromFile(File file) {
-        StringBuilder str = new StringBuilder();
-        try (FileInputStream fileInputStream = new FileInputStream(file.getAbsoluteFile());) {
-            int c;
-            while ((c = fileInputStream.read()) != -1) {
-                char c1 = (char) c;
-                str.append(c1);
+        Map map=new HashMap();
+        String str;
+        try
+        {
+            BufferedReader bufferedReader=new BufferedReader(new java.io.FileReader(file.getAbsolutePath()));
+            System.out.println(bufferedReader);
+            while (bufferedReader.ready()) {
+                 str = bufferedReader.readLine();
+                map.put(str.substring(0,str.indexOf(": ")),str.substring(str.indexOf(": ")+2));
             }
-        } catch (IOException e) {
+        }
+        catch(IOException e)
+        {
             e.printStackTrace();
         }
-        return new Profile("Anna", 25, "anna@mailserver.com", 1234567890L);
+        return new Profile( map.get("Name").toString(), Integer.valueOf(map.get("Age").toString()), (String) map.get("Email"), (Long) map.get("Phone"));
     }
 }
