@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class FileReader {
     public Profile getDataFromFile(File file) {
-        Map<String,String> map = null;
+        Map<String,String> map = new HashMap<>();
         try(BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file.getAbsolutePath()));){
             String str;
             while (bufferedReader.ready()) {
