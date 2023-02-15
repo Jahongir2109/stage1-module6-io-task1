@@ -4,17 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 public class FileReader {
     public Profile getDataFromFile(File file) {
-        Map map=new HashMap();
-        String str;
-        try( BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file.getAbsolutePath()));){
+        Map<String,Object> map=new HashMap();
+        try(BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file.getAbsolutePath()));){
+            String str;
             while (bufferedReader.ready()) {
                 str = bufferedReader.readLine();
                 map.put(str.substring(0,str.indexOf(": ")),str.substring(str.indexOf(": ")+2));
             }
             return new Profile( map.get("Name").toString(), Integer.valueOf(map.get("Age").toString()), (String) map.get("Email"), Long.valueOf((String) map.get("Phone")));
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
