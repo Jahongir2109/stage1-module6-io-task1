@@ -6,9 +6,7 @@ public class FileReader {
     public Profile getDataFromFile(File file) {
         Map map=new HashMap();
         String str;
-        BufferedReader bufferedReader= null;
-        try {
-            bufferedReader = new BufferedReader(new java.io.FileReader(file.getAbsolutePath()));
+        try( BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file.getAbsolutePath()));){
             while (bufferedReader.ready()) {
                 str = bufferedReader.readLine();
                 map.put(str.substring(0,str.indexOf(": ")),str.substring(str.indexOf(": ")+2));
