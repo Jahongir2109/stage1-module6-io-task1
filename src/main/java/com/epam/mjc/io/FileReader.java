@@ -1,11 +1,7 @@
 package com.epam.mjc.io;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
-
-
 public class FileReader {
     public Profile getDataFromFile(File file) {
         Map map=new HashMap();
